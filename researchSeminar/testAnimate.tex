@@ -1,0 +1,243 @@
+
+\documentclass[11pt, aspectratio=169]{beamer}
+% \usetheme{NMSU} 
+\usetheme{Cornell} 
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{graphicx} % for figures
+%\usepackage{animate}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows, decorations.pathreplacing}
+
+\usepackage{animate}
+\usepackage[export]{adjustbox}
+% \usepackage{hyperref}[hidelinks]
+\definecolor{hyperblue}{rgb}{0,0,0.7}
+
+% \hypersetup{
+%   colorlinks = true, 
+%   urlcolor = hyperblue, 
+%   linkcolor = hyperblue, 
+%     anchorcolor = hyperblue,
+%     citecolor = hyperblue,
+%     filecolor = hyperblue,
+%      }
+% \usepackage{titlepic}
+% \usefonttheme{serif}
+% \usefonttheme[onlymath]{serif}
+
+\author[Santantonio]{Nicholas Santantonio}
+\title[Research/Teaching/Outreach/Variety development Seminar] {Research, Teaching, Outreach and Variety development in the ear of data-driven plant breeding}
+\institute{Cornell University}
+\titlegraphic{\includegraphics[width=2cm]{"\string~/Dropbox/CUpres/CULogo-red120px"}}
+% \institute{New Mexico State University}
+% \titlegraphic{\includegraphics[width=2cm]{"\string~/Dropbox/NMSUinterview/NMSU_logos/NMSU_NoU-Crimson"}}
+
+
+\date{March 9$^\text{th}$, 2020} 
+\definecolor{G}{RGB}{76, 132, 59}
+\definecolor{sikPurple}{RGB}{160, 32, 239}
+
+
+\DeclareGraphicsExtensions{%
+    .pdf,.PDF,%
+    .png,.PNG,%
+    .jpg,.mps,.jpeg,.jbig2,.jb2,.JPG,.JPEG,.JBIG2,.JB2}
+
+\newcommand{\highlite}[1]{{\color{Carnellian} #1}}
+
+\newcommand{\backupbegin}{
+    \newcounter{finalframe}
+    \setcounter{finalframe}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+    \setcounter{framenumber}{\value{finalframe}}
+}
+
+\definecolor{darkgreen}{RGB}{0, 100, 0}  % 
+
+
+
+\newcommand{\gear}[6]{%
+	\foreach \i in {1,...,#1} {%
+  		[rotate=(\i-1)*360/#1 + #6]  (0:#2)  arc (0:#4:#2) {[rounded corners=1pt]
+             -- (#4+#5:#3)  arc (#4+#5:360/#1-#5:#3)} --  (360/#1:#2)
+}}    
+
+
+\newcommand{\partialgear}[7]{%
+\foreach \i in {1,...,#7} {%
+  [rotate=(\i-1)*360/#1+#6]  (0:#2)  arc (0:#4:#2) {[rounded corners=1pt]
+             -- (#4+#5:#3)  arc (#4+#5:360/#1-#5:#3)} --  (360/#1:#2)
+} -- (0:#2)
+}  
+
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+
+\definecolor{p3col}{RGB}{211, 82, 56}  % 
+\definecolor{p1col}{RGB}{70, 179, 209}  % 
+\definecolor{p2col}{RGB}{209, 163, 60}  % 
+
+\definecolor{G}{RGB}{76, 132, 59}
+\definecolor{A}{RGB}{221, 158, 50}
+\definecolor{B}{RGB}{61, 170, 179}
+\definecolor{D}{RGB}{216, 74, 82}
+
+\definecolor{optired}{RGB}{211, 82, 56}
+\definecolor{optiblue}{RGB}{70, 179, 209}
+\definecolor{optipurple}{RGB}{123, 98, 205}
+\definecolor{optigreen}{RGB}{117, 180, 65}
+\definecolor{optiyellow}{RGB}{209, 163, 60}
+\definecolor{optipink}{RGB}{211, 66, 121}
+% \definecolor{opti}{RGB}{188, 95, 107}
+% \definecolor{opti}{RGB}{127, 134, 61}
+% \definecolor{opti}{RGB}{196, 127, 188}
+\definecolor{optisteel}{RGB}{103, 127, 198}
+% \definecolor{opti}{RGB}{191, 79, 180}
+% \definecolor{opti}{RGB}{79, 169, 119}
+% \definecolor{opti}{RGB}{184, 118, 66}
+
+
+\tikzset{>=latex}
+% \tikzset{>=stealth'}
+
+\makeatletter
+\tikzset{
+    database/.style={
+        path picture={
+            \draw (0, 1.5*\database@segmentheight) circle [x radius=\database@radius,y radius=\database@aspectratio*\database@radius];
+            \draw (-\database@radius, 0.5*\database@segmentheight) arc [start angle=180,end angle=360,x radius=\database@radius, y radius=\database@aspectratio*\database@radius];
+            \draw (-\database@radius,-0.5*\database@segmentheight) arc [start angle=180,end angle=360,x radius=\database@radius, y radius=\database@aspectratio*\database@radius];
+            \draw (-\database@radius,1.5*\database@segmentheight) -- ++(0,-3*\database@segmentheight) arc [start angle=180,end angle=360,x radius=\database@radius, y radius=\database@aspectratio*\database@radius] -- ++(0,3*\database@segmentheight);
+        },
+        minimum width=2*\database@radius + \pgflinewidth,
+        minimum height=3*\database@segmentheight + 2*\database@aspectratio*\database@radius + \pgflinewidth,
+    },
+    database segment height/.store in=\database@segmentheight,
+    database radius/.store in=\database@radius,
+    database aspect ratio/.store in=\database@aspectratio,
+    database segment height=0.1cm,
+    database radius=0.25cm,
+    database aspect ratio=0.35,
+}
+\makeatother
+
+
+\newcommand{\helix}[3]{
+  \foreach \x in {2, ...,13}{
+    \draw[thick, #3, line cap=round] (\x,{-sin(\x*36)}) -- (\x,{sin(\x*36)});
+  }
+  \draw[#2, very thick, line cap=round] plot (\x,{sin(\x*36)});
+  \draw[#3, very thick, line cap=round] plot (\x,{-sin(\x*36)});
+          % \node at (5,8) {\begin{tabular}{c} Genome-wide\\markers \end{tabular}};
+}
+
+\newcommand{\vdp}[2]{
+  \foreach \x in {-9, ...,9}{
+    \draw[draw = #1, fill = #2, thick, rounded corners = 0.5] (\x*0.5 - 0.1, 0) rectangle (\x*0.5 + 0.1, -2);
+  }
+  \foreach \x in {-4, ...,4}{
+    \draw[draw = #1, fill = #2, thick, rounded corners = 1] (\x*0.75 - 0.25, -2.5) rectangle (\x*0.75 +0.25, -4.5);
+  }
+  \foreach \x in {-2, ...,2}{
+    \draw[draw = #1, fill = #2, thick, rounded corners = 1] (\x-0.35, -5) rectangle (\x+0.35, -7);
+  }
+  \foreach \x in {-1, ...,1}{
+    \draw[draw = #1, fill = #2, thick, rounded corners = 1] (\x*1.25-0.45, -7.5) rectangle (\x*1.25+0.45, -10.5);
+  }
+  \draw[draw = #1, fill = #2, thick, rounded corners = 1] (-0.45, -11) rectangle (0.45, -14);
+}
+
+\newcommand{\drone}[2]{
+  \draw[draw = #1, fill = #2] (0, 0) ellipse (6 and 0.5);
+  \draw[draw = #1, fill = #2] (6, 1) ellipse (0.2 and 1);
+  \draw[draw = #1, fill = #2] (-6, 1) ellipse (0.2 and 1);
+  \draw[draw = #1, fill = #2] (6, 2) circle (0.2);
+  \draw[draw = #1, fill = #2] (-6, 2) circle (0.2);
+  \draw[draw = #1, fill = #2] (4.5, 2) ellipse (1.5 and 0.1);
+  \draw[draw = #1, fill = #2] (-4.5, 2) ellipse (1.5 and 0.1);
+  \draw[draw = #1, fill = #2] (7.5, 2) ellipse (1.5 and 0.1);
+  \draw[draw = #1, fill = #2] (-7.5, 2) ellipse (1.5 and 0.1);
+  \draw[draw = #1, fill = #2, rounded corners = 1] (-2, -0.7) rectangle (2, -3);
+  \draw[draw = white, fill = black, thick] (0.7, -2) circle (0.7);
+  \fill[draw = white, fill = white] (0.5, -1.8) circle (0.3);
+}
+
+\newcommand{\db}[2]{
+  % \node[database,database radius=0.75cm,database segment height=0.325cm, #1, very thick] at (0,0) {};
+  \node[database,label=below:#2,database radius=0.75cm,database segment height=0.325cm, #1, very thick] at (0,0) {};
+
+}
+
+\newcommand{\gearstat}[2]{
+  \fill[#1] circle (2.5cm);
+  \draw[#2, thick, fill = #1] \gear{8}{2.5}{3}{20}{4}{16};
+  \draw[thick, #2, fill=white] (0cm,0cm) circle(2cm);
+  \node[align=center, circle,inner sep=0pt, minimum size=3cm] (gp) at (0, 0) {\tiny{$\ \ \begin{aligned}\sum^P_{i=1} \alpha_i \end{aligned}$}};
+}
+
+\definecolor{dgray}{RGB}{40, 40, 40}
+\definecolor{lgray}{RGB}{180, 180, 180}
+\definecolor{lgreen}{RGB}{137, 162, 76}
+\definecolor{dgreen}{RGB}{97, 115, 53}
+
+% \def\graycol{dgray}
+\def\graycol{lgray}
+
+
+\def\dronedrawcol{black}
+\def\dronefillcol{optired}
+\def\dronebladecol{dgray}
+\def\dronecameracol{optired}
+% \def\dronecol{dgray}
+
+\def\dbcol{optipurple}
+\def\dbfillcol{white}
+
+\def\plotLine{dgreen}
+\def\plotFill{lgreen}
+
+
+\def\dnabridge{optiyellow}
+\def\dnaA{optipurple}
+\def\dnaB{optiblue}
+
+\def\gearcol{optiyellow}
+\def\gearOTcol{lgray}
+
+\setbeamertemplate{enumerate items}[circle]
+
+\begin{document}
+
+% \makeatletter
+% \let\zeropad\@anim@pad
+% \makeatother
+
+\begin{frame}
+ \frametitle{title}
+ \begin{animateinline}[controls, autoplay,loop]{2}
+   % \multiframe{21}{i=1+1}{
+   \multiframe{21}{i=1+1}{
+     \begin{tikzpicture}
+       \node[inner sep=0pt] at (0,0) {\includegraphics[width=0.5\textwidth]{../../alfalfaGeneva/animateOrtho/ortho\i}};
+       \node[inner sep=0pt] at (8,0) {\includegraphics[width=0.5\textwidth]{../../interviewFigs/egGrowthCurvesAnimatePNGs/pg-\i}};
+  		% \node at (0, 0) {\animategraphics[controls, width = 0.6\linewidth]{1}{../../alfalfaGeneva/animateOrtho/ortho}{1}{21}};
+  	\draw[thick, optipurple] (-1.8, -0.07) rectangle (-0.7, 0.18);
+  	\draw[thick, optiyellow] (-1.8, 0.75) rectangle (-0.7, 1);
+  	\draw[thick, optiblue] (-1.8, -0.65) rectangle (-0.7, -0.9);
+     \end{tikzpicture}
+   }
+ \end{animateinline}
+\end{frame}
+\end{document}
